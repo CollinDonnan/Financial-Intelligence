@@ -1,0 +1,9 @@
+services:
+  ui:
+    image: ui
+    build:
+      context: ./ui
+      dockerfile: dockerfile
+    container_name: ui
+    ports:
+      - "3000:80"
