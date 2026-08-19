@@ -1,4 +1,16 @@
 services:
+  db:
+    image: postgres:17
+    container_name: db
+    environment:
+      POSTGRES_DB: financial_intelligence
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
   ui:
     image: ui
     build:
@@ -7,3 +19,23 @@ services:
     container_name: ui
     ports:
       - "3000:80"
+    depends_on:
+      - be
+
+  be:
+    image: be
+    build: 
+      context: ./be
+      dockerfile: Dockerfile
+    container_name: be
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/financial_intelligence
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+
+volumes:
+  postgres-data:
