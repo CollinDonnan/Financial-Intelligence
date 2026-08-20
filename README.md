@@ -30,3 +30,9 @@ Documnetation - Swagger
 
 # Architecture
 
+# Documentation
+
+Api docs are found at
+
+http://localhost:8081/v3/api-docs
+
