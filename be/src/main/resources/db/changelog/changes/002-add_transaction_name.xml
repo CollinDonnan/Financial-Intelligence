@@ -4,7 +4,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include file="db/changelog/changes/001-add_transactions.xml"/>
-    <include file="db/changelog/changes/002-add_transaction_name.xml"/>
+    <changeSet id="002-add-transaction-name" author="cd">
+        <addColumn tableName="transactions">
+            <column name="name" type="VARCHAR(255)"/>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

@@ -10,6 +10,8 @@ Docker
 ```
 https://github.com/CollinDonnan/Financial-Intelligence.git
 
+cd Financial Intelligence
+
 docker compose up
 ```
 # Tech Stack
