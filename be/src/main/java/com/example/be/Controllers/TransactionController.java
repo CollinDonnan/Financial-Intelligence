@@ -41,6 +41,12 @@ public class TransactionController {
         return transactionMapper.toDTO(transactionService.getTransactionById((long) id));
     }
 
+    @Operation(summary = "Get all transactions", description = "Returns a list of all transactions")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Transactions retrieved successfully"),
+        @ApiResponse(responseCode = "404", description = "Transactions not found"),
+        @ApiResponse(responseCode = "500", description = "Internal server error"),
+    })
     @GetMapping("/transactions")
     public List<TransactionDTO> allTransactions() {
         return transactionService.getAllTransactions().stream()
@@ -48,16 +54,36 @@ public class TransactionController {
                 .collect(Collectors.toList());
     }
 
+    @Operation(summary = "Create a new transaction", description = "Creates a new transaction with the provided details")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Transaction created successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid transaction data"),
+        @ApiResponse(responseCode = "404", description = "Transaction not found"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @PostMapping("/transactions")
     public TransactionDTO createTransaction(@RequestBody TransactionDTO transaction) {
         return transactionMapper.toDTO(transactionService.saveTransaction(transactionMapper.toEntity(transaction)));
     }
 
+    @Operation(summary = "Update an existing transaction", description = "Updates the transaction with the given id using the provided details")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Transaction updated successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid transaction data"),
+        @ApiResponse(responseCode = "404", description = "Transaction not found"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @PutMapping("/transaction/{id}")
     public TransactionDTO updateTransaction(@PathVariable("id") int id, @RequestBody TransactionDTO transaction) {
         return transactionMapper.toDTO(transactionService.updateTransaction((long) id, transactionMapper.toEntity(transaction)));
     }
 
+    @Operation(summary = "Delete a transaction", description = "Deletes the transaction with the given id")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Transaction deleted successfully"),
+        @ApiResponse(responseCode = "404", description = "Transaction not found"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @DeleteMapping("/transaction/{id}")
     public void deleteTransaction(@PathVariable("id") int id) {
         transactionService.deleteTransactionById((long) id);
