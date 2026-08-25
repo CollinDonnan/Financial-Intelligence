@@ -6,5 +6,6 @@
 
     <include file="db/changelog/changes/001-add_transactions.xml"/>
     <include file="db/changelog/changes/002-add_transaction_name.xml"/>
+    <include file="db/changelog/changes/003-add_budget.xml"/>
 
 </databaseChangeLog>

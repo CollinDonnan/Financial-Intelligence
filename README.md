@@ -1,40 +1,62 @@
 # Financial-Intelligence
-An application I use for my personal finances
+A personal finance app I built for tracking spending, updating budgets, and keeping an eye on what’s left to spend.
 
-# Dependancies
-Java>=21
+# Dependencies
+Java >= 21
 Docker
 
 # Running the Application
 
 ```
-https://github.com/CollinDonnan/Financial-Intelligence.git
+git clone https://github.com/CollinDonnan/Financial-Intelligence.git
 
-cd Financial Intelligence
+cd Financial-Intelligence
 
 docker compose up
 ```
+
 # Tech Stack
 
-Backend - Spring boot
+Backend - Spring Boot
 
 Frontend - React
 
-Database - Postgres, Liquibase
+Database - PostgreSQL, Liquibase
 
 Deployment - Docker
 
 Testing - Mockito, Vitest
 
-Documnetation - Swagger
+Documentation - Swagger
 
 # Features
 
+- Add transactions
+- Delete transactions
+- Update transactions
+- Update budget amounts
+- Calculate remaining budget totals
+- Track personal spending in a simple, easy-to-use interface
+
+# Planned Features
+
+- Transaction categories
+- Credit card optimization
+- Stock tracking
+
 # Architecture
+
+The frontend sends requests to the Spring Boot API, which handles the business logic and interacts with the PostgreSQL database. Liquibase manages the database migrations, and Docker keeps the app easy to run locally.
+
+```mermaid
+flowchart LR
+	UI[React UI] --> API[Spring Boot API] --> DB[(PostgreSQL)]
+	Migration[Liquibase] --> DB
+```
 
 # Documentation
 
-Api docs are found at
+API docs are available at:
 
 http://localhost:8081/v3/api-docs
 

@@ -1,5 +1,7 @@
 package com.example.be.Entities;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -20,6 +22,8 @@ public class TransactionEntity {
     @Column(name = "amount")
     private Double amount;
 
+    @Column(name = "created_at", insertable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     public String getName() {
         return name;
@@ -43,5 +47,9 @@ public class TransactionEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }

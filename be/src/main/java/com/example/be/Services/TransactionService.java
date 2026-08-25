@@ -3,7 +3,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import com.example.be.Entities.TransactionEntity;
-import com.example.be.Repos.EntityRepository;
+import com.example.be.Repos.TransactionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,22 +11,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TransactionService {
 
     @Autowired
-    private EntityRepository entityRepository;
+    private TransactionRepository transactionRepository;
 
     public TransactionEntity saveTransaction(TransactionEntity transaction) {
-        return entityRepository.save(transaction);
+        return transactionRepository.save(transaction);
     }
 
     public TransactionEntity getTransactionById(Long id) {
-        return entityRepository.findById(id).orElse(null);
+        return transactionRepository.findById(id).orElse(null);
+    }
+
+    public TransactionEntity updateTransaction(Long id, TransactionEntity transaction) {
+        TransactionEntity existing = transactionRepository.findById(id).orElse(null);
+        if (existing == null) {
+            return null;
+        }
+        existing.setName(transaction.getName());
+        existing.setAmount(transaction.getAmount());
+        return transactionRepository.save(existing);
     }
 
     public void deleteTransactionById(Long id) {
-        entityRepository.deleteById(id);
+        transactionRepository.deleteById(id);
     }
 
     public List<TransactionEntity> getAllTransactions() {
-        return entityRepository.findAll();
+        return transactionRepository.findAll();
     }
     
 }
